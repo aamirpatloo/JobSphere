@@ -1,9 +1,25 @@
+import { Routes, Route } from "react-router-dom";
+
+import Layout from "./components/Layout";
+
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
+
 function App() {
   return (
-    <div>
-      <h1>Welcome to JobSphere 🚀</h1>
-      <p>Connecting talent with opportunities.</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
