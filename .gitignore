@@ -16,3 +16,7 @@ Thumbs.db
 
 # VS Code settings
 .vscode/
+
+*.code-workspace
+resources.yaml
+workspace.globals.json
