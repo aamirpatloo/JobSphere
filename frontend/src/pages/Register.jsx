@@ -19,7 +19,34 @@ function Register() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      alert("Please enter a valid email.");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
     console.log(formData);
+    alert("Registration successful!");
   }
 
   return (

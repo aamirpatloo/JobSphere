@@ -17,7 +17,24 @@ function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      alert("Please enter a valid email.");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
+
     console.log(formData);
+    alert("Login form submitted successfully!");
   }
 
   return (
