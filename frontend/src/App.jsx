@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 
 import Home from "./pages/Home";
@@ -16,6 +16,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

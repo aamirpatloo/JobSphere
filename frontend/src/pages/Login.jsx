@@ -1,89 +1,84 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import InputField from "../components/InputField";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/api";
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  }
+    const navigate = useNavigate();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      alert("Please fill in all fields.");
-      return;
-    }
+        try {
+            const data = await loginUser(email, password);
 
-    if (!formData.email.includes("@")) {
-      alert("Please enter a valid email.");
-      return;
-    }
+            localStorage.setItem("token", data.token);
 
-    if (formData.password.length < 6) {
-      alert("Password must be at least 6 characters.");
-      return;
-    }
+            alert("Login successful!");
 
-    console.log(formData);
-    alert("Login form submitted successfully!");
-  }
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
+    };
 
-  return (
-    <div className="flex min-h-[80vh] items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
-      >
-        <h1 className="mb-6 text-center text-3xl font-bold">
-          Login
-        </h1>
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
 
-        <InputField
-          label="Email"
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+                <h1 className="text-2xl font-bold text-center mb-6">
+                    Login
+                </h1>
 
-        <InputField
-          label="Password"
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+                <form onSubmit={handleLogin}>
 
-        <button
-          type="submit"
-          className="mt-4 w-full rounded-lg bg-blue-600 py-3 text-white hover:bg-blue-700"
-        >
-          Login
-        </button>
+                    {/* Email */}
+                    <div className="mb-4">
+                        <label className="block mb-2">
+                            Email
+                        </label>
 
-        <p className="mt-4 text-center text-sm">
-          Don't have an account?{" "}
-          <Link
-            to="/register"
-            className="font-semibold text-blue-600 hover:underline"
-          >
-            Register
-          </Link>
-        </p>
-      </form>
-    </div>
-  );
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full border p-2 rounded"
+                            placeholder="Enter your email"
+                            required
+                        />
+                    </div>
+
+                    {/* Password */}
+                    <div className="mb-6">
+                        <label className="block mb-2">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full border p-2 rounded"
+                            placeholder="Enter your password"
+                            required
+                        />
+                    </div>
+
+                    {/* Login Button */}
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    >
+                        Login
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    );
 }
 
 export default Login;

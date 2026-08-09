@@ -1,0 +1,8 @@
+  feature/auth-ui[m
+  feature/backend-foundation[m
+  feature/frontend-foundation[m
+  feature/homepage-ui[m
+  feature/project-setup[m
+* [32mfeature/user-login[m
+  feature/user-registration[m
+  main[m
