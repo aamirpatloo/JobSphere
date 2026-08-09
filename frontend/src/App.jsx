@@ -7,6 +7,8 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import Jobs from "./pages/Jobs";
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/create-job" element={<CreateJob />} />
+        <Route path="/jobs" element={<Jobs />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
