@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
-
+import CreateJob from "./pages/CreateJob";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -17,6 +17,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/create-job" element={<CreateJob />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
