@@ -1,14 +1,18 @@
 import { Routes, Route } from "react-router-dom";
-import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
-import CreateJob from "./pages/CreateJob";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import NotFound from "./pages/NotFound";
 import Jobs from "./pages/Jobs";
-
+import JobDetails from "./pages/JobDetails";
+import Profile from "./pages/Profile";
+import MyApplications from "./pages/MyApplications";
+import RecruiterDashboard from "./pages/RecruiterDashboard";
+import CreateJob from "./pages/CreateJob";
+import EditJob from "./pages/EditJob";
+import JobApplicants from "./pages/JobApplicants";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -18,9 +22,14 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/create-job" element={<CreateJob />} />
-        <Route path="/jobs" element={<Jobs />} />
+        <Route path="jobs" element={<Jobs />} />
+        <Route path="jobs/:id" element={<JobDetails />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="applications" element={<MyApplications />} />
+        <Route path="recruiter/dashboard" element={<RecruiterDashboard />} />
+        <Route path="create-job" element={<CreateJob />} />
+        <Route path="jobs/edit/:id" element={<EditJob />} />
+        <Route path="jobs/:jobId/applicants" element={<JobApplicants />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
