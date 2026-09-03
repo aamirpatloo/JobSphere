@@ -5,6 +5,7 @@ import { getJobById, updateJob } from "../services/api";
 function EditJob() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
@@ -19,6 +20,11 @@ function EditJob() {
     const [error, setError] = useState("");
 
     useEffect(() => {
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+
         const fetchJob = async () => {
             setFetching(true);
             setError("");

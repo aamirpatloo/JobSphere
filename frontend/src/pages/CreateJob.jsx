@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createJob } from "../services/api";
 
 function CreateJob() {
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
@@ -15,6 +16,22 @@ function CreateJob() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user?.role !== "recruiter") {
+                alert("Access restricted to recruiters only.");
+                navigate("/jobs");
+            }
+        } catch (e) {
+            navigate("/login");
+        }
+    }, [token, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
